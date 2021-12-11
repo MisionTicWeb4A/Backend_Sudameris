@@ -2,7 +2,8 @@ const express = require('express');
 const morgan = require('morgan');
 const app = express();
 
-//const { mongoose } = require('./database');
+const { client } = require('./database');
+const datos = require('./models/task');
 
 //Configuracion de server
 app.set('port', process.env.PORT || 8080);
@@ -12,8 +13,11 @@ app.use(morgan('dev'));
 app.use(express.json()); 
 
 //routes
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     res.send('Bienvenidos al sitio Web del Banco Sudameris');
+    const datosCliente = await datos.find();
+    console.log(datosCliente);
+    res.json(datosCliente);
   });
 
 //Inicializacion de server  

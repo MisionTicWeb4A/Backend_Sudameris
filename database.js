@@ -1,8 +1,10 @@
-const mongoose = require('mongoose');
-const URI = 'mongodb:'
+const { MongoClient } = require('mongodb');
+const uri = "mongodb+srv://sudamerist1:DOZhuHLup5NejpFN@cluster0.jkvzv.mongodb.net/data_sudameris?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  
+  client.close();
+});
 
-mongoose.connect(URI)
-    .then(db => console.log('DB is connected'))
-    .catch(err => console.error(err));
-
-export default mongoose;
+module.exports = client;
