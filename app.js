@@ -1,26 +1,25 @@
 const express = require('express');
+require('dotenv').config();
 const morgan = require('morgan');
 const app = express();
-
-const { client } = require('./database');
+const { registrarControlador } = require('./controllers');
 const datos = require('./models/task');
+const { conectarBd } = require('./db/database');
+
 
 //Configuracion de server
-app.set('port', process.env.PORT || 8080);
+const port= process.env.PORT || 8080;
 
 //middlewares
 app.use(morgan('dev'));
 app.use(express.json()); 
+app.use(express.urlencoded({extended: false}));
 
-//routes
-app.get('/', async (req, res) => {
-    res.send('Bienvenidos al sitio Web del Banco Sudameris');
-    const datosCliente = await datos.find();
-    console.log(datosCliente);
-    res.json(datosCliente);
-  });
+conectarBd();
+//Controladoras
+registrarControlador(app);
 
 //Inicializacion de server  
-app.listen(app.get('port'), () => {
-    console.log(`Server listening at port ${app.get('port')}`);
+app.listen(port, () => {
+    console.log(`Server listening at port ${port}`);
     });
