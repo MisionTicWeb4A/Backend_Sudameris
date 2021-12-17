@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
-//const uri = "mongodb+srv://sudamerist1:DOZhuHLup5NejpFN@cluster0.jkvzv.mongodb.net/data_sudameris?retryWrites=true&w=majority";
+
 const conectarBd = async () => {
     try {
       await mongoose.connect(process.env.MONGODB_URI);
-      console.log('Connectado a MongoDB');
+      console.log('Conectado a BD Sudameris con MongoDB');
     } 
     catch (e) {
       console.log('No se ha podido establecer conexión con la BD');
