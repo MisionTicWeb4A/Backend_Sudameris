@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  client:
+    build: .
+    command: sh -c 'npm install; npm install node-sass --save; npm run dev' 
+    image: banco_react 
+    container_name: banco_react_backend
+    volumes:
+      - .:/banco_react_backend
+    ports:
+      - '${PORT}:${PORT}'

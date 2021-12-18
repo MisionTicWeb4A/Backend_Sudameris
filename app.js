@@ -7,10 +7,10 @@ const datos = require('./models/task');
 const { conectarBd } = require('./db/database');
 
 
-//Configuracion de server
+// Configuracion de server
 const port= process.env.PORT || 8080;
 
-//middlewares
+// Middlewares
 app.use(morgan('dev'));
 app.use(express.json()); 
 app.use(express.urlencoded({extended: false}));
@@ -22,4 +22,4 @@ registrarControlador(app);
 //Inicializacion de server  
 app.listen(port, () => {
     console.log(`Server listening at port ${port}`);
-    });
+});
