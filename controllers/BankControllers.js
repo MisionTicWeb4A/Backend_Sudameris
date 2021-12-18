@@ -3,10 +3,14 @@
 const router = require('express-promise-router')();
 
 const {
-    index
+    getUsers,
+    newUser,
+    getUser
 } = require('../controllers/user')
 
-router.get('/', index);
+router.get('/users', getUsers);
+router.post('/user', newUser);
+router.get('/user/:userId', getUser);
 
 router.get('/all', async (req, res) => {
     const page = parseInt(req.query.page) || 1;
